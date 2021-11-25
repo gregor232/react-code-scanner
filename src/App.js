@@ -40,7 +40,7 @@ const App = () => {
     <>
       <div className="App">
         <button variant="contained" color="secondary" onClick={onScanFile}>
-          Scan Qr Code
+          scan qr code
         </button>
         <QrReader
           ref={qrRef}
@@ -50,17 +50,17 @@ const App = () => {
           onScan={handleScanFile}
           legacyMode
         />
-        <h3>Scanned Code: {scanResultFile}</h3>
+        <h3>{scanResultFile}</h3>
       </div>
       <div>
-        <h3>Qr Code Scan by Web Cam</h3>
+        <h3>web cam scan</h3>
         <QrReader
           delay={300}
           style={{ width: "100%" }}
           onError={handleErrorWebCam}
           onScan={handleScanWebCam}
         />
-        <h3>Scanned By WebCam Code: {scanResultWebCam}</h3>
+        <h3>code: {scanResultWebCam}</h3>
       </div>
     </>
   );
