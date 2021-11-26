@@ -37,9 +37,9 @@ const App = () => {
   };
 
   return (
-    <div style={{ width: "50%", margin: "0 auto" }}>
+    <div style={{ width: "100%", margin: "0 auto" }}>
       <div className="App">
-        <button
+        {/* <button
           style={{ display: "block", margin: "0 auto" }}
           onClick={onScanFile}
         >
@@ -48,14 +48,14 @@ const App = () => {
         <QrReader
           ref={qrRef}
           delay={300}
-          style={{ width: "100%", height: `10px` }}
+          style={{ width: "100%", height: `10vh` }}
           onError={handleErrorFile}
           onScan={handleScanFile}
           legacyMode
         />
-        <h3 style={{ textAlign: "center" }}>{scanResultFile}</h3>
+        <h3 style={{ textAlign: "center" }}>{scanResultFile}</h3> */}
       </div>
-      <div style={{ width: "100%", margin: "0 auto" }}>
+      <div style={{ width: "100%" }}>
         <h3 style={{ textAlign: "center" }}>web cam scan</h3>
         <div style={{ height: "50vh", width: "50vh", margin: "0 auto" }}>
           <QrReader
