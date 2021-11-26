@@ -1,11 +1,14 @@
 import React, { useState, useRef } from "react";
 import QrReader from "react-qr-reader";
+import BarcodeScannerComponent from "react-qr-barcode-scanner";
 
 const App = () => {
-  const [text, setText] = useState("");
+  const [result, setResult] = useState("No re");
   const [imageUrl, setImageUrl] = useState("");
   const [scanResultFile, setScanResultFile] = useState("");
   const [scanResultWebCam, setScanResultWebCam] = useState("");
+  const [data, setData] = useState("Not Found");
+
   const qrRef = useRef(null);
 
   // const generateQrCode = async () => {
@@ -16,16 +19,14 @@ const App = () => {
   //     console.log(error);
   //   }
   // }
-  const handleErrorFile = (error) => {
-    console.log(error);
-  };
-  const handleScanFile = (result) => {
+
+  const handleScan = (result) => {
     if (result) {
-      setScanResultFile(result);
+      setResult(result);
     }
   };
-  const onScanFile = () => {
-    qrRef.current.openImageDialog();
+  const handleError = (error) => {
+    console.error(error);
   };
   const handleErrorWebCam = (error) => {
     console.log(error);
@@ -35,26 +36,10 @@ const App = () => {
       setScanResultWebCam(result);
     }
   };
-
+  const switchScanner = () => {};
   return (
     <div style={{ width: "100%", margin: "0 auto" }}>
-      <div className="App">
-        {/* <button
-          style={{ display: "block", margin: "0 auto" }}
-          onClick={onScanFile}
-        >
-          scan qr code
-        </button>
-        <QrReader
-          ref={qrRef}
-          delay={300}
-          style={{ width: "100%", height: `10vh` }}
-          onError={handleErrorFile}
-          onScan={handleScanFile}
-          legacyMode
-        />
-        <h3 style={{ textAlign: "center" }}>{scanResultFile}</h3> */}
-      </div>
+      <div className="App"></div>
       <div style={{ width: "100%" }}>
         <h3 style={{ textAlign: "center" }}>web cam scan</h3>
         <div style={{ height: "50vh", width: "50vh", margin: "0 auto" }}>
@@ -66,6 +51,19 @@ const App = () => {
           />
         </div>
         <h3 style={{ textAlign: "center" }}>code: {scanResultWebCam}</h3>
+      </div>
+      <div style={{ width: "50%", margin: "0 auto" }}>
+        <BarcodeScannerComponent
+          width={"100%"}
+          height={500}
+          onUpdate={(err, result) => {
+            if (result) setData(result.text);
+            else setData("Not Found");
+          }}
+        />
+        <p style={{ width: "50%", margin: "0 auto", textAlign: "center" }}>
+          {data}
+        </p>
       </div>
     </div>
   );
