@@ -19,7 +19,7 @@ const App = () => {
   //     console.log(error);
   //   }
   // }
-
+  //
   const handleScan = (result) => {
     if (result) {
       // setResult(result);
