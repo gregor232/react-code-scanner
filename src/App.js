@@ -16,6 +16,7 @@ const App = () => {
   //     console.log(error);
   //   }
   // }
+  //
   const handleErrorFile = (error) => {
     console.log(error);
   };
