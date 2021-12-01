@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import QrReader from "react-qr-reader";
-import BarcodeScannerComponent from "react-qr-barcode-scanner";
+// import BarcodeScannerComponent from "react-qr-barcode-scanner";
 
 const App = () => {
   const [scanner, setScanner] = useState("Display QR scanner");
@@ -72,14 +72,14 @@ const App = () => {
         </div>
       ) : (
         <div style={{ width: "50%", margin: "0 auto" }}>
-          <BarcodeScannerComponent
+          {/* <BarcodeScannerComponent
             width={"100%"}
             height={500}
             onUpdate={(err, result) => {
               if (result) setData(result.text);
               else setData("Not Found");
             }}
-          />
+          /> */}
           <p style={{ width: "50%", margin: "0 auto", textAlign: "center" }}>
             {data}
           </p>
