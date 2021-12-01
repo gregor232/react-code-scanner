@@ -20,8 +20,10 @@ const App = () => {
   //   }
   // }
   //
-  //
-  const handleScan = (result) => {
+  const handleErrorFile = (error) => {
+    console.log(error);
+  };
+  const handleScanFile = (result) => {
     if (result) {
       // setResult(result);
     }
