@@ -20,6 +20,7 @@ const App = () => {
   //   }
   // }
   //
+  //
   const handleScan = (result) => {
     if (result) {
       // setResult(result);
