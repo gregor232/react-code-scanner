@@ -33,7 +33,7 @@ const BarcodeScanner = () => {
       constraints: {
         width: 640,
         height: 480,
-        deviceId: backCamID, // or user
+        facing: "environment", // or user
       },
     },
     locator: {
@@ -59,6 +59,7 @@ const BarcodeScanner = () => {
       setData(data);
     });
     Quagga.decodeSingle(config, (result) => {
+      console.log(result);
       if (result.codeResult) {
         setResult(result.codeResult.code);
       } else {
@@ -70,8 +71,8 @@ const BarcodeScanner = () => {
   return (
     <>
       <div id="interactive" className="viewport" />
-      <div>{result}</div>
-      <div>{data}</div>
+      <p style={{ textAlign: "center" }}>{result}</p>
+      <p style={{ textAlign: "center" }}>{data}</p>
     </>
   );
 };
