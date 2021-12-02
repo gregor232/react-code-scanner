@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import QrReader from "react-qr-reader";
 import Quagga from "quagga";
+import BarcodeScanner from "./components/BarcodeScanner";
 
 const App = () => {
   const [scanner, setScanner] = useState("Display QR scanner");
@@ -9,35 +10,35 @@ const App = () => {
   const [scanResultWebCam, setScanResultWebCam] = useState("");
   const [data, setData] = useState("Not Found");
 
-  console.log(Quagga);
+  console.log(BarcodeScanner);
 
-  const config = {
-    inputStream: {
-      name: "Live",
-      type: "LiveStream",
-      target: document.querySelector("#barcode"), // Or '#yourElement' (optional)
-    },
-    decoder: {
-      readers: ["code_128_reader"],
-    },
-  };
+  // const config = {
+  //   inputStream: {
+  //     name: "Live",
+  //     type: "LiveStream",
+  //     target: document.querySelector("#barcode"), // Or '#yourElement' (optional)
+  //   },
+  //   decoder: {
+  //     readers: ["code_128_reader"],
+  //   },
+  // };
 
-  Quagga.init(config, function (err) {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    console.log("Initialization finished. Ready to start");
-    Quagga.start();
-    Quagga.onDetected((data) => console.log(data));
-    Quagga.decodeSingle(config, (result) => {
-      if (result.codeResult) {
-        setResult(result.codeResult.code);
-      } else {
-        console.log("not detected");
-      }
-    });
-  });
+  // Quagga.init(config, function (err) {
+  //   if (err) {
+  //     console.log(err);
+  //     return;
+  //   }
+  //   console.log("Initialization finished. Ready to start");
+  //   Quagga.start();
+  //   Quagga.onDetected((data) => console.log(data));
+  //   Quagga.decodeSingle(config, (result) => {
+  //     if (result.codeResult) {
+  //       setResult(result.codeResult.code);
+  //     } else {
+  //       console.log("not detected");
+  //     }
+  //   });
+  // });
 
   const qrRef = useRef(null);
 
@@ -84,9 +85,7 @@ const App = () => {
         </div>
       ) : (
         <div style={{ width: "50%", margin: "0 auto" }}>
-          <p style={{ width: "50%", margin: "0 auto", textAlign: "center" }}>
-            {result}
-          </p>
+          <BarcodeScanner />
         </div>
       )}
     </div>
