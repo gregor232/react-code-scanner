@@ -1,36 +1,46 @@
 import React, { useState, useRef } from "react";
 import QrReader from "react-qr-reader";
-import BarcodeScannerComponent from "react-qr-barcode-scanner";
+import Quagga from "quagga";
 
 const App = () => {
   const [scanner, setScanner] = useState("Display QR scanner");
-  const [imageUrl, setImageUrl] = useState("");
+  const [result, setResult] = useState("");
   const [scanResultFile, setScanResultFile] = useState("");
   const [scanResultWebCam, setScanResultWebCam] = useState("");
   const [data, setData] = useState("Not Found");
 
+  console.log(Quagga);
+
+  const config = {
+    inputStream: {
+      name: "Live",
+      type: "LiveStream",
+      target: document.querySelector("#barcode"), // Or '#yourElement' (optional)
+    },
+    decoder: {
+      readers: ["code_128_reader"],
+    },
+  };
+
+  Quagga.init(config, function (err) {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    console.log("Initialization finished. Ready to start");
+    Quagga.start();
+    Quagga.onDetected((data) => console.log(data));
+    Quagga.decodeSingle(config, (result) => {
+      if (result.codeResult) {
+        setResult(result.codeResult.code);
+      } else {
+        console.log("not detected");
+      }
+    });
+  });
+
   const qrRef = useRef(null);
 
-  // const generateQrCode = async () => {
-  //   try {
-  //         const response = await QRCode.toDataURL(text);
-  //         setImageUrl(response);
-  //   }catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-  //
-  const handleErrorFile = (error) => {
-    console.log(error);
-  };
-  const handleScanFile = (result) => {
-    if (result) {
-      // setResult(result);
-    }
-  };
-  const handleError = (error) => {
-    console.error(error);
-  };
   const handleErrorWebCam = (error) => {
     console.log(error);
   };
@@ -39,7 +49,6 @@ const App = () => {
       setScanResultWebCam(result);
     }
   };
-  const switchScanner = () => {};
   return (
     <div style={{ width: "100%", margin: "0 auto" }}>
       <button
@@ -64,27 +73,19 @@ const App = () => {
         <div style={{ width: "100%" }}>
           <h3 style={{ textAlign: "center" }}>web cam scan</h3>
           <div style={{ height: "50vh", width: "50vh", margin: "0 auto" }}>
-            <QrReader
+            {/* <QrReader
               delay={300}
               style={{ width: "100%", margin: "0 auto" }}
               onError={handleErrorWebCam}
               onScan={handleScanWebCam}
-            />
+            /> */}
           </div>
           <h3 style={{ textAlign: "center" }}>code: {scanResultWebCam}</h3>
         </div>
       ) : (
         <div style={{ width: "50%", margin: "0 auto" }}>
-          <BarcodeScannerComponent
-            width={"100%"}
-            height={500}
-            onUpdate={(err, result) => {
-              if (result) setData(result.text);
-              else setData("Not Found");
-            }}
-          />
           <p style={{ width: "50%", margin: "0 auto", textAlign: "center" }}>
-            {data}
+            {result}
           </p>
         </div>
       )}
