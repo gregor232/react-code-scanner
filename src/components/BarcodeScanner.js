@@ -31,18 +31,18 @@ const BarcodeScanner = () => {
         return console.log(err);
       }
       Quagga.start();
+      Quagga.onDetected((data) => {
+        setData(data);
+      });
+      Quagga.decodeSingle(config, (result) => {
+        if (result.codeResult) {
+          setResult(result.codeResult.code);
+        } else {
+          console.log("not detected");
+        }
+      });
     });
     // Quagga.onDetected((data) => console.log("data", data));
-    Quagga.onDetected((data) => {
-      setData(data);
-    });
-    Quagga.decodeSingle(config, (result) => {
-      if (result.codeResult) {
-        setResult(result.codeResult.code);
-      } else {
-        console.log("not detected");
-      }
-    });
   }, []);
 
   return (
