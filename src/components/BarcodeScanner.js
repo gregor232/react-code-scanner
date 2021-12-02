@@ -48,8 +48,8 @@ const BarcodeScanner = () => {
   return (
     <>
       <div id="interactive" className="viewport" />
-      <div>{result}asd</div>
-      <div>{result}no data </div>
+      <div>{result}</div>
+      <div>{data}</div>
     </>
   );
 };
