@@ -33,7 +33,7 @@ const BarcodeScanner = () => {
       constraints: {
         width: 640,
         height: 480,
-        facing: "environment", // or user
+        facingMode: "environment", // or user
       },
     },
     locator: {
