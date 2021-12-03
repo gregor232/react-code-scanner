@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import QrReader from "react-qr-reader";
 import Quagga from "quagga";
 import BarcodeScanner from "./components/BarcodeScanner";
@@ -25,6 +25,25 @@ const App = () => {
     const imageSrc = webcamRef.current.getScreenshot();
     setImage(imageSrc);
   }, [webcamRef]);
+
+  useEffect(() => {
+    javascriptBarcodeReader({
+      /* Image file Path || {data: Uint8ClampedArray, width, height} || HTML5 Canvas ImageData */
+      image: image,
+      barcode: "code-2of5",
+      // barcodeType: 'industrial',
+      options: {
+        // useAdaptiveThreshold: true // for images with sahded portions
+        // singlePass: true
+      },
+    })
+      .then((code) => {
+        setResult(code);
+      })
+      .catch((err) => {
+        setResult(err);
+      });
+  }, [image]);
 
   const handleErrorWebCam = (error) => {
     console.log(error);
@@ -79,6 +98,7 @@ const App = () => {
           />
           <button onClick={capture}>Capture photo</button>
           <p>{image}</p>
+          <p>{result}</p>
         </div>
       )}
     </div>
