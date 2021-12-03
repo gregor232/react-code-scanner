@@ -30,9 +30,8 @@ const App = () => {
   }, [webcamRef]);
 
   useEffect(() => {
-    setCheck("yes");
-
     if (image !== false) {
+      setCheck("yes");
       javascriptBarcodeReader({
         /* Image file Path || {data: Uint8ClampedArray, width, height} || HTML5 Canvas ImageData */
         image: image,
