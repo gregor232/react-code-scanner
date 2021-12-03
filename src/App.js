@@ -12,6 +12,7 @@ const App = () => {
   const [check, setCheck] = useState("no");
   const [scanResultWebCam, setScanResultWebCam] = useState("");
   const [image, setImage] = useState(false);
+  const [imageSrc, setImageSrc] = useState(false);
 
   const videoConstraints = {
     width: 1280,
@@ -23,12 +24,14 @@ const App = () => {
 
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
+    setImageSrc(imageSrc);
     const img = <img alt="barcode" src={imageSrc}></img>;
     setImage(img);
-    setCheck("yes");
   }, [webcamRef]);
 
   useEffect(() => {
+    setCheck("yes");
+
     if (image !== false) {
       javascriptBarcodeReader({
         /* Image file Path || {data: Uint8ClampedArray, width, height} || HTML5 Canvas ImageData */
@@ -106,7 +109,7 @@ const App = () => {
               videoConstraints={videoConstraints}
             />
           ) : (
-            <img alt="barcode" src={image} />
+            <img alt="barcode" src={imageSrc} />
           )}
 
           <button onClick={capture}>Capture photo</button>
