@@ -32,6 +32,7 @@ const App = () => {
   useEffect(() => {
     if (image !== false) {
       setCheck("yes");
+      console.log(image);
       javascriptBarcodeReader({
         /* Image file Path || {data: Uint8ClampedArray, width, height} || HTML5 Canvas ImageData */
         image: image,
