@@ -35,7 +35,7 @@ const App = () => {
       console.log(image);
       javascriptBarcodeReader({
         /* Image file Path || {data: Uint8ClampedArray, width, height} || HTML5 Canvas ImageData */
-        image: image,
+        image: imageSrc,
         barcode: "code-2of5",
         // barcodeType: 'industrial',
         options: {
