@@ -25,9 +25,10 @@ const App = () => {
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
     setImageSrc(imageSrc);
+    const carriage = imageSrc.replace(/[\n\r]+/g, "");
     let image = new Image();
     image.crossOrigin = "Anonymous";
-    image.src = imageSrc;
+    image.src = carriage;
     //const img = <img alt="barcode" src={imageSrc}></img>;
     //setImage(img);
     image.onload = function () {
