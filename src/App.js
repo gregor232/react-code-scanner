@@ -11,7 +11,7 @@ const App = () => {
   const [result, setResult] = useState("");
   const [scanResultFile, setScanResultFile] = useState("");
   const [scanResultWebCam, setScanResultWebCam] = useState("");
-  const [data, setData] = useState("Not Found");
+  const [image, setImage] = useState();
 
   const videoConstraints = {
     width: 1280,
@@ -23,6 +23,7 @@ const App = () => {
 
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
+    setImage(imageSrc);
   }, [webcamRef]);
 
   const handleErrorWebCam = (error) => {
@@ -77,6 +78,7 @@ const App = () => {
             videoConstraints={videoConstraints}
           />
           <button onClick={capture}>Capture photo</button>
+          <p>{image}</p>
         </div>
       )}
     </div>
