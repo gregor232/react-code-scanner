@@ -25,36 +25,46 @@ const App = () => {
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
     setImageSrc(imageSrc);
-    const img = <img alt="barcode" src={imageSrc}></img>;
-    setImage(img);
+    let image = new Image();
+    image.crossOrigin = "Anonymous";
+    image.src = "./img/w2kx-code-93.jpg";
+    //const img = <img alt="barcode" src={imageSrc}></img>;
+    //setImage(img);
+    image.onload = function () {
+      javascriptBarcodeReader({
+        image: image,
+        barcode: "code-93",
+        // barcodeType: "interleaved"
+      })
+        .then((res) => {
+          setResult(res);
+        })
+        .catch(console.log);
+    };
   }, [webcamRef]);
 
-  useEffect(() => {
-    if (image !== false) {
-      setCheck("yes");
-      console.log(image);
-      javascriptBarcodeReader({
-        /* Image file Path || {data: Uint8ClampedArray, width, height} || HTML5 Canvas ImageData */
-        image: imageSrc,
-        barcode: "code-2of5",
-        // barcodeType: 'industrial',
-        options: {
-          // useAdaptiveThreshold: true // for images with sahded portions
-          // singlePass: true
-        },
-      })
-        .then((code) => {
-          if (code) {
-            setResult("code");
-          }
-        })
-        .catch((err) => {
-          if (err) {
-            setResult("err");
-          }
-        });
-    }
-  }, [image]);
+  // useEffect(() => {
+  //   if (image !== false) {
+  //     setCheck("yes");
+  //     console.log(image);
+  //     javascriptBarcodeReader({
+  //       /* Image file Path || {data: Uint8ClampedArray, width, height} || HTML5 Canvas ImageData */
+  //       image: imageSrc,
+  //       barcode: "code-2of5",
+
+  //     })
+  //       .then((code) => {
+  //         if (code) {
+  //           setResult("code");
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         if (err) {
+  //           setResult("err");
+  //         }
+  //       });
+  //   }
+  // }, [image]);
 
   const handleErrorWebCam = (error) => {
     console.log(error);
