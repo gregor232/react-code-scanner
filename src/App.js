@@ -1,7 +1,10 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import QrReader from "react-qr-reader";
 import Quagga from "quagga";
 import BarcodeScanner from "./components/BarcodeScanner";
+import javascriptBarcodeReader from "javascript-barcode-reader";
+import Camera from "./components/Camera";
+import Webcam from "react-webcam";
 
 const App = () => {
   const [scanner, setScanner] = useState("Display QR scanner");
@@ -10,37 +13,17 @@ const App = () => {
   const [scanResultWebCam, setScanResultWebCam] = useState("");
   const [data, setData] = useState("Not Found");
 
-  console.log(BarcodeScanner);
+  const videoConstraints = {
+    width: 1280,
+    height: 720,
+    facingMode: "user",
+  };
 
-  // const config = {
-  //   inputStream: {
-  //     name: "Live",
-  //     type: "LiveStream",
-  //     target: document.querySelector("#barcode"), // Or '#yourElement' (optional)
-  //   },
-  //   decoder: {
-  //     readers: ["code_128_reader"],
-  //   },
-  // };
+  const webcamRef = React.useRef(null);
 
-  // Quagga.init(config, function (err) {
-  //   if (err) {
-  //     console.log(err);
-  //     return;
-  //   }
-  //   console.log("Initialization finished. Ready to start");
-  //   Quagga.start();
-  //   Quagga.onDetected((data) => console.log(data));
-  //   Quagga.decodeSingle(config, (result) => {
-  //     if (result.codeResult) {
-  //       setResult(result.codeResult.code);
-  //     } else {
-  //       console.log("not detected");
-  //     }
-  //   });
-  // });
-
-  const qrRef = useRef(null);
+  const capture = React.useCallback(() => {
+    const imageSrc = webcamRef.current.getScreenshot();
+  }, [webcamRef]);
 
   const handleErrorWebCam = (error) => {
     console.log(error);
@@ -85,7 +68,15 @@ const App = () => {
         </div>
       ) : (
         <div style={{ width: "50%", margin: "0 auto" }}>
-          <BarcodeScanner />
+          <Webcam
+            audio={false}
+            height={720}
+            ref={webcamRef}
+            screenshotFormat="image/jpeg"
+            width={1280}
+            videoConstraints={videoConstraints}
+          />
+          <button onClick={capture}>Capture photo</button>
         </div>
       )}
     </div>
