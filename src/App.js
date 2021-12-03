@@ -95,14 +95,19 @@ const App = () => {
         </div>
       ) : (
         <div style={{ width: "50%", margin: "0 auto" }}>
-          <Webcam
-            audio={false}
-            height={720}
-            ref={webcamRef}
-            screenshotFormat="image/jpeg"
-            width={1280}
-            videoConstraints={videoConstraints}
-          />
+          {image === false ? (
+            <Webcam
+              audio={false}
+              height={720}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+              width={1280}
+              videoConstraints={videoConstraints}
+            />
+          ) : (
+            <img alt="barcode" src={image} />
+          )}
+
           <button onClick={capture}>Capture photo</button>
           <p>{result}</p>
           <p>{check}</p>
