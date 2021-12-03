@@ -44,7 +44,7 @@ const App = () => {
       })
       .catch((err) => {
         if (err) {
-          setResult(err.code);
+          setResult(err);
         }
       });
   }, [image]);
@@ -101,7 +101,6 @@ const App = () => {
             videoConstraints={videoConstraints}
           />
           <button onClick={capture}>Capture photo</button>
-          <p>{image}</p>
           <p>{result}</p>
         </div>
       )}
