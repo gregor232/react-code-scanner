@@ -8,7 +8,7 @@ import Webcam from "react-webcam";
 
 const App = () => {
   const [scanner, setScanner] = useState("Display QR scanner");
-  const [result, setResult] = useState("");
+  const [result, setResult] = useState("asd");
   const [scanResultFile, setScanResultFile] = useState("");
   const [scanResultWebCam, setScanResultWebCam] = useState("");
   const [image, setImage] = useState();
@@ -38,10 +38,14 @@ const App = () => {
       },
     })
       .then((code) => {
-        setResult(code);
+        if (code) {
+          setResult(code);
+        }
       })
       .catch((err) => {
-        setResult(err);
+        if (err) {
+          setResult(err.code);
+        }
       });
   }, [image]);
 
