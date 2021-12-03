@@ -11,7 +11,7 @@ const App = () => {
   const [result, setResult] = useState("asd");
   const [scanResultFile, setScanResultFile] = useState("");
   const [scanResultWebCam, setScanResultWebCam] = useState("");
-  const [image, setImage] = useState();
+  const [image, setImage] = useState(false);
 
   const videoConstraints = {
     width: 1280,
@@ -27,26 +27,28 @@ const App = () => {
   }, [webcamRef]);
 
   useEffect(() => {
-    javascriptBarcodeReader({
-      /* Image file Path || {data: Uint8ClampedArray, width, height} || HTML5 Canvas ImageData */
-      image: image,
-      barcode: "code-2of5",
-      // barcodeType: 'industrial',
-      options: {
-        // useAdaptiveThreshold: true // for images with sahded portions
-        // singlePass: true
-      },
-    })
-      .then((code) => {
-        if (code) {
-          setResult("code");
-        }
+    if (image !== false) {
+      javascriptBarcodeReader({
+        /* Image file Path || {data: Uint8ClampedArray, width, height} || HTML5 Canvas ImageData */
+        image: image,
+        barcode: "code-2of5",
+        // barcodeType: 'industrial',
+        options: {
+          // useAdaptiveThreshold: true // for images with sahded portions
+          // singlePass: true
+        },
       })
-      .catch((err) => {
-        if (err) {
-          setResult("err");
-        }
-      });
+        .then((code) => {
+          if (code) {
+            setResult("code");
+          }
+        })
+        .catch((err) => {
+          if (err) {
+            setResult("err");
+          }
+        });
+    }
   }, [image]);
 
   const handleErrorWebCam = (error) => {
