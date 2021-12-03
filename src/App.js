@@ -39,12 +39,12 @@ const App = () => {
     })
       .then((code) => {
         if (code) {
-          setResult(code);
+          setResult("code");
         }
       })
       .catch((err) => {
         if (err) {
-          setResult(err);
+          setResult("err");
         }
       });
   }, [image]);
