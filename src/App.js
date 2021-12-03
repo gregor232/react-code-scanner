@@ -27,7 +27,7 @@ const App = () => {
     setImageSrc(imageSrc);
     let image = new Image();
     image.crossOrigin = "Anonymous";
-    image.src = Img;
+    image.src = imageSrc;
     //const img = <img alt="barcode" src={imageSrc}></img>;
     //setImage(img);
     image.onload = function () {
