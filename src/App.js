@@ -9,7 +9,7 @@ import Webcam from "react-webcam";
 const App = () => {
   const [scanner, setScanner] = useState("Display QR scanner");
   const [result, setResult] = useState("asd");
-  const [scanResultFile, setScanResultFile] = useState("");
+  const [check, setCheck] = useState("no");
   const [scanResultWebCam, setScanResultWebCam] = useState("");
   const [image, setImage] = useState(false);
 
@@ -24,6 +24,7 @@ const App = () => {
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
     setImage(imageSrc);
+    setCheck("yes");
   }, [webcamRef]);
 
   useEffect(() => {
@@ -104,6 +105,7 @@ const App = () => {
           />
           <button onClick={capture}>Capture photo</button>
           <p>{result}</p>
+          <p>{check}</p>
         </div>
       )}
     </div>
