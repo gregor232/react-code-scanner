@@ -23,7 +23,8 @@ const App = () => {
 
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
-    setImage(imageSrc);
+    const img = <img alt="barcode" src={imageSrc}></img>;
+    setImage(img);
     setCheck("yes");
   }, [webcamRef]);
 
