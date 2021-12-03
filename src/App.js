@@ -5,7 +5,7 @@ import BarcodeScanner from "./components/BarcodeScanner";
 import javascriptBarcodeReader from "javascript-barcode-reader";
 import Camera from "./components/Camera";
 import Webcam from "react-webcam";
-
+import Img from "./img/w2kx-code-93.jpg";
 const App = () => {
   const [scanner, setScanner] = useState("Display QR scanner");
   const [result, setResult] = useState("asd");
@@ -27,7 +27,7 @@ const App = () => {
     setImageSrc(imageSrc);
     let image = new Image();
     image.crossOrigin = "Anonymous";
-    image.src = "./img/w2kx-code-93.jpg";
+    image.src = Img;
     //const img = <img alt="barcode" src={imageSrc}></img>;
     //setImage(img);
     image.onload = function () {
