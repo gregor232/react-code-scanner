@@ -33,7 +33,7 @@ const App = () => {
     image.src = carriage;
     //const img = <img alt="barcode" src={imageSrc}></img>;
     //setImage(img);
-    console.log(typeof image, "imgg");
+    console.log(image.src, "imgg");
     //
 
     javascriptBarcodeReader({
