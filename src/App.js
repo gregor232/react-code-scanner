@@ -24,6 +24,7 @@ const App = () => {
 
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
+    console.log(imageSrc, "SRC");
     setImageSrc(imageSrc);
     const carriage = imageSrc.replace(/[\n\r]+/g, "");
     let image = new Image();
