@@ -15,10 +15,6 @@ const App = () => {
     facingMode: "user",
   };
 
-  let img = new Image();
-  img.crossOrigin = "Anonymous";
-  img.src = "./img/4.jpg";
-
   const webcamRef = React.useRef(null);
 
   const capture = React.useCallback(() => {
@@ -45,6 +41,12 @@ const App = () => {
     //     })
     //     .catch(console.log("err"));
     // }
+
+    let img = new Image();
+    img.crossOrigin = "Anonymous";
+    img.src = "./img/4.jpg";
+
+    console.log(img.src, img);
 
     img.onload = function () {
       javascriptBarcodeReader({
