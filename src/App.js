@@ -35,17 +35,16 @@ const App = () => {
     //setImage(img);
     console.log(typeof image, "imgg");
     //
-    image.onload = function () {
-      javascriptBarcodeReader({
-        image: image,
-        barcode: "code-93",
-        // barcodeType: "interleaved"
+
+    javascriptBarcodeReader({
+      image: image,
+      barcode: "code-93",
+      // barcodeType: "interleaved"
+    })
+      .then((res) => {
+        setResult(res);
       })
-        .then((res) => {
-          setResult(res);
-        })
-        .catch(console.log("err"));
-    };
+      .catch(console.log("err"));
   }, [webcamRef]);
 
   // useEffect(() => {
