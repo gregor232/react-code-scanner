@@ -34,7 +34,19 @@ const App = () => {
     //setImage(img);
     console.log(image.src, "imgg");
     //
-    if (image) {
+    // if (image) {
+    //   javascriptBarcodeReader({
+    //     image: img,
+    //     barcode: "code-93",
+    //     // barcodeType: "interleaved"
+    //   })
+    //     .then((res) => {
+    //       setResult(res);
+    //     })
+    //     .catch(console.log("err"));
+    // }
+
+    img.onload = function () {
       javascriptBarcodeReader({
         image: img,
         barcode: "code-93",
@@ -44,7 +56,7 @@ const App = () => {
           setResult(res);
         })
         .catch(console.log("err"));
-    }
+    };
   }, [webcamRef]);
 
   // useEffect(() => {
