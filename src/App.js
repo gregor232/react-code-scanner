@@ -23,10 +23,10 @@ const App = () => {
   const webcamRef = React.useRef(null);
 
   const capture = React.useCallback(() => {
-    const imageSrc = webcamRef.current.getScreenshot();
-    console.log(imageSrc, "SRC");
-    setImageSrc(imageSrc);
-    const carriage = imageSrc.replace(/[\n\r]+/g, "");
+    const imageSource = webcamRef.current.getScreenshot();
+    console.log(imageSource, "SRC");
+    setImageSrc(imageSource);
+    const carriage = imageSource.replace(/[\n\r]+/g, "");
     let image = new Image();
     image.crossOrigin = "Anonymous";
     image.src = carriage;
@@ -42,7 +42,7 @@ const App = () => {
         .then((res) => {
           setResult(res);
         })
-        .catch(console.log);
+        .catch(console.log("err"));
     };
   }, [webcamRef]);
 
