@@ -17,7 +17,7 @@ const App = () => {
 
   let img = new Image();
   img.crossOrigin = "Anonymous";
-  img.src = "./img/1.jpg";
+  img.src = "./img/4.jpg";
 
   const webcamRef = React.useRef(null);
 
