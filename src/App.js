@@ -20,6 +20,10 @@ const App = () => {
     facingMode: "user",
   };
 
+  let img = new Image();
+  img.crossOrigin = "Anonymous";
+  img.src = "./img/1.jpg";
+
   const webcamRef = React.useRef(null);
 
   const capture = React.useCallback(() => {
@@ -35,16 +39,17 @@ const App = () => {
     //setImage(img);
     console.log(image.src, "imgg");
     //
-
-    javascriptBarcodeReader({
-      image: image,
-      barcode: "code-93",
-      // barcodeType: "interleaved"
-    })
-      .then((res) => {
-        setResult(res);
+    if (image) {
+      javascriptBarcodeReader({
+        image: image,
+        barcode: "code-93",
+        // barcodeType: "interleaved"
       })
-      .catch(console.log("err"));
+        .then((res) => {
+          setResult(res);
+        })
+        .catch(console.log("err"));
+    }
   }, [webcamRef]);
 
   // useEffect(() => {
