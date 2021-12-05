@@ -36,7 +36,7 @@ const App = () => {
     //
     if (image) {
       javascriptBarcodeReader({
-        image: image,
+        image: img,
         barcode: "code-93",
         // barcodeType: "interleaved"
       })
