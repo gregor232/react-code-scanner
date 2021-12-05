@@ -17,6 +17,24 @@ const App = () => {
 
   const webcamRef = React.useRef(null);
 
+  let img = new Image();
+  img.crossOrigin = "Anonymous";
+  img.src = "./img/4.jpg";
+
+  console.log(img.src, img);
+
+  img.onload = function () {
+    javascriptBarcodeReader({
+      image: img,
+      barcode: "code-93",
+      // barcodeType: "interleaved"
+    })
+      .then((res) => {
+        setResult(res);
+      })
+      .catch(console.log("err"));
+  };
+
   const capture = React.useCallback(() => {
     setImage(true);
     const imageSource = webcamRef.current.getScreenshot();
@@ -41,24 +59,6 @@ const App = () => {
     //     })
     //     .catch(console.log("err"));
     // }
-
-    let img = new Image();
-    img.crossOrigin = "Anonymous";
-    img.src = "./img/4.jpg";
-
-    console.log(img.src, img);
-
-    img.onload = function () {
-      javascriptBarcodeReader({
-        image: img,
-        barcode: "code-93",
-        // barcodeType: "interleaved"
-      })
-        .then((res) => {
-          setResult(res);
-        })
-        .catch(console.log("err"));
-    };
   }, [webcamRef]);
 
   // useEffect(() => {
