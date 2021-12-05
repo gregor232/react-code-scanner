@@ -32,6 +32,7 @@ const App = () => {
     image.src = carriage;
     //const img = <img alt="barcode" src={imageSrc}></img>;
     //setImage(img);
+    console.log(image, "image");
     image.onload = function () {
       javascriptBarcodeReader({
         image: image,
