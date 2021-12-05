@@ -23,6 +23,7 @@ const App = () => {
   const webcamRef = React.useRef(null);
 
   const capture = React.useCallback(() => {
+    setImage(true);
     const imageSource = webcamRef.current.getScreenshot();
     console.log(imageSource, "SRC");
     setImageSrc(imageSource);
